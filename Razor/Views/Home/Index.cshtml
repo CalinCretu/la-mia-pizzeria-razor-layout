@@ -1,0 +1,94 @@
+﻿@{
+    //  1. Dichiarare una variabile valorizzandola con il nostro nome. Dichiarare un'altra variabile valorizzandola con il nostro cognome. Stampare il nostro nome e cognome all'interno di un tag h2.
+    var nome = "Calin";
+    var cognome = "Cretu";
+
+    //  2. Creare una funzione che stampa la somma dei numeri che vanno da 1 a n (con n passato come parametro - n incluso) Stampare dentro uno span il risultato.
+    int CalcolaSomma(int n)
+    {
+        int somma = 0;
+        for (int i = 1; i <= n; i++)
+        {
+            somma += i;
+        }
+        return somma;
+    }
+
+    //  3.Contare quante volte la lettera a è presente nalla frase "nel mezzo del cammin di nostra vita" e stampare questo valore in pagina
+    string frase = "nel mezzo del cammin di nostra vita";
+
+    int conteggioLetteraA = 0;
+
+    foreach (char carattere in frase)
+    {
+        if (carattere == 'a')
+        {
+            conteggioLetteraA++;
+        }
+    }
+
+    //  4. Creare una List<int> di 20 numeri interi (generati random da 1 a 90, 1 e 90 inclusi) e mostrare in pagina solo i numeri compresi tra 20 e 70
+    var random = new Random();
+
+    List<int> numeri = Enumerable.Range(1, 20).Select(x => random.Next(1, 91)).ToList();
+
+    var numeriFiltrati = numeri.Where(x => x >= 20 && x <= 70).ToList();
+
+    //  5. Stampare in pagina la data e l'ora attuale (usando la classe DateTime) con il formato anno-mese-giorno ore:minuti:secondi
+    DateTime now = DateTime.Now;
+    string formattedDateTime = now.ToString("yyyy-MM-dd HH:mm:ss");
+
+    //  6. Partendo dalla data di oggi (usando la classe DateTime) stampare in pagina
+        // a. la data di 7 giorni fa
+    DateTime setteGiorniFa = now.AddDays(-7);
+    string formattedSetteGiorniFa = setteGiorniFa.ToString("yyyy-MM-dd");
+
+        // b. che giorno della settimana è oggi (il risultato dovrà  essere il nome del giorno (Lunedì, Martedì, ...)
+    string giornoSettimanaOggi = now.ToString("dddd");
+
+    // c. che giorno della settimana sarà  nello stesso giorno e mese di oggi ma tra un anno (il risultato dovrÃ  essere il nome del giorno (Lunedì, Martedì, ...)
+    DateTime traUnAnno = now.AddYears(1);
+    string giornoSettimanaTraUnAnno = traUnAnno.ToString("dddd");
+}
+
+<!-- 1 -->
+<div class="container">
+    <h2>Ciao, mi chiamo @nome @cognome</h2>
+</div>
+<!-- 2 -->
+<div class="container">
+    <h4>Funzione che stampa la somma dei numeri che vanno da 1 a 5</h4>
+    <span>La somma dei numeri da 1 a 5 è: @CalcolaSomma(5)</span>
+</div>
+<!-- 3 -->
+<div class="container">
+    <h4>Contare quante volte la lettera a è presente nalla frase "nel mezzo del cammin di nostra vita"</h4>
+    <span>Il numero di 'a' nella frase è: @conteggioLetteraA</span>
+</div>
+<!-- 4 -->
+<div class="container">
+    <h4>Numeri casuali da 1 a 90 compresi tra 20 e 70:</h4>
+    <ul class="horizontal-list">
+        @foreach (var numero in numeriFiltrati)
+        {
+            <li>@numero</li>
+        }
+    </ul>
+</div>
+<!-- 5 -->
+<div class="container">
+    <h4>Data e ora attuali:</h4>
+    <p>@formattedDateTime</p>
+</div>
+<!-- 6 -->
+<div class="container">
+    <!-- 6.a -->
+    <h4>Data di 7 giorni fa</h4>
+    <p>@formattedSetteGiorniFa</p>
+    <!-- 6.b -->
+    <h4>Oggi è:</h4>
+    <p style="text-transform: capitalize;">@giornoSettimanaOggi</p>
+    <!-- 6.c -->
+    <h4>Giorno della settimana tra un anno:</h4>
+    <p style="text-transform: capitalize;">@giornoSettimanaTraUnAnno</p>
+</div>
